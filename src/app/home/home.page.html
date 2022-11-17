@@ -12,45 +12,24 @@
       <ion-row class="ion-justify-content-center">
         <ion-col size-sm="12" size-md="6" size-lg="3">
             <ion-item lines="full">
-              <ion-label position="floating" >Número de control</ion-label>
-              <ion-input type="text" formControlName="controlNumber"></ion-input>
+              <ion-label position="floating" >Token</ion-label>
+              <ion-input type="text" formControlName="token"></ion-input>
             </ion-item>
             <div>
-              <ng-container *ngFor="let item of validationMessages['controlnumber']">
-                <div class="errormessage" *ngIf="(myForm.get('controlNumber').dirty || 
-                myForm.get('controlNumber').touched) && myForm.get('controlNumber').hasError(item.type) ">
+              <ng-container *ngFor="let item of validationMessages['token']">
+                <div class="errormessage" *ngIf="(myForm.get('token').dirty || 
+                myForm.get('token').touched) && myForm.get('token').hasError(item.type) ">
                 {{item.message}}
                 </div>
               </ng-container>
-            </div>
-            <ion-item lines="full">
-              <ion-label position="floating" >NIP</ion-label>
-              <ion-input type="password" formControlName="nip"></ion-input>
-            </ion-item>
-            <div>
-              <ng-container *ngFor="let item of validationMessages['nip']">
-                <div class="errormessage" *ngIf="(myForm.get('nip').dirty || 
-                myForm.get('nip').touched) && myForm.get('nip').hasError(item.type) ">
-                {{item.message}}
-                </div>
-              </ng-container>
-            </div>
+            </div>           
             <ion-row>
               <ion-col>
-                <ion-button  (click)="login(myForm.value)" type="submit" color="danger" expand="block" *ngIf="myForm.valid">Sign In</ion-button>
+                <ion-button  (click)="login(myForm.value)" type="submit" color="danger" expand="block" *ngIf="myForm.valid">Ingresar</ion-button>
               </ion-col>
             </ion-row>
-            <!-- <ion-row>
-              <ion-col class="ion-text-center">
-                <a class="small-text ion-text-center" expand="block">Forgot Password?</a>
-              </ion-col>
-            </ion-row> -->
         </ion-col>
       </ion-row>
     </form>
   </ion-grid>
-</ion-content>
-<ion-content [fullscreen]="true">
-  <ion-button (click)="admin()">Admin</ion-button>
-  <ion-button (click)="guesped()">Guesped</ion-button>
 </ion-content>

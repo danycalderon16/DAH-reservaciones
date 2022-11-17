@@ -15,10 +15,10 @@ export class HomePage {
   public myForm: FormGroup;
   public validationMessages: Object;
 
-  private ADMIN = 10004
+  private ADMIN = 'ADMI0000'
 
   constructor(
-    private guest:GuestService,
+    private guestService:GuestService,
     private fb: FormBuilder,
     private toast: ToastController,
     private route: Router) { }
@@ -26,50 +26,51 @@ export class HomePage {
     ngOnInit() {
       this.myForm = this.fb.group(
         {
-          controlNumber: ["", Validators.compose([Validators.required,
+          token: ["", Validators.compose([Validators.required,
           Validators.minLength(8),
-          Validators.maxLength(8),
-          Validators.pattern('^[0-9]+$')])],
-          nip: ["", Validators.compose([Validators.required, Validators.min(10), Validators.max(9999)])],
+          Validators.maxLength(8)])]
         }
       );
       this.validationMessages = {
-        "controlnumber": [
+        "token": [
           {
             "type": "required",
-            "message": "Número de control obligatorio"
+            "message": "Token obligatorio"
           },
           {
             "type": "minlength",
-            "message": "El número de control debe ser de 8 dígitos"
+            "message": "El Token debe ser de 8 dígitos"
           },
           {
             "type": "maxlength",
-            "message": "El número de control debe ser de 8 dígitos"
-          },
-          {
-            "type": "pattern",
-            "message": "El número de control está mal ingresado"
+            "message": "El Token debe ser de 8 dígitos"
           }
-        ],
-        "nip": [
-          { type: 'required', message: 'El NIP es obligatorip' },
-          { type: 'min', message: 'NIP demasiado corto' },
-          { type: 'miax', message: 'NIP demasiado largo' },
         ]
       }
     }
   
 
-  admin(){
+  goAdminPage(){
     this.route.navigate(['view-rooms-list'])
   }
 
-  guesped(){
+  goGuestPage(){
     this.route.navigate(['tabs'])
   }
 
   public login(data){
-
+    const token = data.token;
+    if(token===this.ADMIN)
+      this.goAdminPage();
+    else{
+      const guest = this.guestService.getGuestByToken(token);
+      if(guest){
+        this.goGuestPage();
+      }
+      else{
+        console.log('no existe');
+        
+      }
+    }
   }
 }
