@@ -14,7 +14,7 @@ export class HomePage {
   ) {}
 
   admin(){
-
+    this.route.navigate(['view-rooms-list'])
   }
 
   guesped(){
