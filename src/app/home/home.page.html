@@ -13,7 +13,7 @@
         <ion-col size-sm="12" size-md="6" size-lg="3">
             <ion-item lines="full">
               <ion-label position="floating" >Token</ion-label>
-              <ion-input type="text" formControlName="token"></ion-input>
+              <ion-input type="text" formControlName="token" (keyup.enter)="clic()"></ion-input>
             </ion-item>
             <div>
               <ng-container *ngFor="let item of validationMessages['token']">
@@ -25,7 +25,10 @@
             </div>           
             <ion-row>
               <ion-col>
-                <ion-button  (click)="login(myForm.value)" type="submit" color="danger" expand="block" *ngIf="myForm.valid">Ingresar</ion-button>
+                <ion-button 
+                  (click)="login(myForm.value)" type="submit" color="danger" expand="block" 
+                >Ingresar</ion-button>
+                <!-- *ngIf="myForm.valid" -->
               </ion-col>
             </ion-row>
         </ion-col>
