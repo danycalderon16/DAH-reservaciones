@@ -60,17 +60,28 @@ export class HomePage {
 
   public login(data){
     const token = data.token;
-    if(token===this.ADMIN)
+    if(token===this.ADMIN){
       this.goAdminPage();
-    else{
+      this.presentToast('bottom','Bienvenido administrador');
+    }else{
       const guest = this.guestService.getGuestByToken(token);
       if(guest){
         this.goGuestPage();
+        this.presentToast('bottom',`Bienvenido ${guest.name}`);
       }
       else{
-        console.log('no existe');
+        this.presentToast('bottom','No exite un huesped con ese token')
         
       }
     }
+  }
+  public async presentToast(position: 'top' | 'middle' | 'bottom', message:string) {
+    const toast = await this.toast.create({
+      message,
+      duration: 1500,
+      position,
+      cssClass: 'custom-toast',
+    });
+    await toast.present();
   }
 }
