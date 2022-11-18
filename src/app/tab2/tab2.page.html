@@ -1,10 +1,23 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Hotel</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logOut()">
+        SALIR
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="!show">
+  <div class="advice">
+    <ion-text color="primary">
+      <h1>No está en el periodo reservado</h1>
+    </ion-text>
+  </div>
+</ion-content>
+
+<ion-content *ngIf="show">
   <div class="content-wrapper">
     <div class="content-body ">
       <ion-list>
@@ -22,7 +35,7 @@
         </ion-item>
         <ion-item>
           <ion-label><strong>Clave de acceso</strong></ion-label>
-          <p>[Clave]</p>
+          <p>{{key}}</p>
         </ion-item>
       </ion-list>
     </div>

@@ -3,6 +3,7 @@ import { NavigationExtras, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { ToastController } from '@ionic/angular';
 import { GuestService } from '../services/guest.service';
+import { Guest } from '../models/guest';
 
 
 @Component({
@@ -54,11 +55,9 @@ export class HomePage {
     this.route.navigate(['view-rooms-list'])
   }
 
-  goGuestPage(token:string) {
-    this.route.navigate(['tabs'],
-    {
-      queryParams:{token:token}
-    })
+  goGuestPage(guest:Guest) {
+    this.guestService.setCurrentGuest(guest);
+    this.route.navigate(['tabs']);
   }
 
   clic() {
@@ -76,7 +75,7 @@ export class HomePage {
     } else {
       const guest = this.guestService.getGuestByToken(token);
       if (guest) {
-        this.goGuestPage(guest.token);
+        this.goGuestPage(guest);
         this.presentToast('bottom', `Bienvenido ${guest.name}`);
       }
       else {
