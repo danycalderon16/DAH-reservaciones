@@ -65,4 +65,8 @@ export class ViewRoomsListPage implements OnInit {
     await toast.present();
   }
 
+  logOut(){
+    this.router.navigate(['home']);
+  }
+
 }
