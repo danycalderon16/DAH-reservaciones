@@ -52,4 +52,8 @@ export class GuestService {
       return guest.token === token;
     });
   }
+
+  public removeGuest(pos:number){
+    return this.guests.splice(pos,1);
+  }
 }

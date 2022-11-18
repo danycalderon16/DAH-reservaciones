@@ -63,8 +63,6 @@ export class HomePage {
     this.login(this.myForm.value)
     else
     this.presentToast('bottom','Ingrese correctamente el token')
-
-
   }
 
   public login(data) {
