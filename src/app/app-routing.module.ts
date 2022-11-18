@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'new-guest',
+    redirectTo: 'tabs',
     pathMatch: 'full'
   },
   {
