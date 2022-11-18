@@ -54,8 +54,11 @@ export class HomePage {
     this.route.navigate(['view-rooms-list'])
   }
 
-  goGuestPage() {
-    this.route.navigate(['tabs'])
+  goGuestPage(token:string) {
+    this.route.navigate(['tabs'],
+    {
+      queryParams:{token:token}
+    })
   }
 
   clic() {
@@ -73,7 +76,7 @@ export class HomePage {
     } else {
       const guest = this.guestService.getGuestByToken(token);
       if (guest) {
-        this.goGuestPage();
+        this.goGuestPage(guest.token);
         this.presentToast('bottom', `Bienvenido ${guest.name}`);
       }
       else {
