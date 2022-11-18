@@ -60,21 +60,20 @@ export class NewGuestPage implements OnInit {
   }
 
   public newGuest(data):void{
-    // let date_in = data.date_in;
-    // let formattedString = format(parseISO(date_in), 'MMM d, yyyy');
+    let date_in = data.date_in;
+    let formattedString = format(parseISO(date_in), 'dd-MM-yyyy');
      this.guest = data;
-    // this.guest.date_in = formattedString;
-    // let date_out = data.date_out;
-    // formattedString = format(parseISO(date_out), 'MMM d, yyyy');
-    // this.guest.date_out = formattedString;
-    // if(date_in>date_out){
-    //   return console.log('La fecha esta mal');      
-    // }
+    this.guest.date_in = formattedString;
+    let date_out = data.date_out;
+    formattedString = format(parseISO(date_out), 'dd-MM-yyyy');
+    this.guest.date_out = formattedString;
+    if(date_in>date_out){
+      return console.log('La fecha esta mal');      
+    }
     this.guest.token = this.createToken(data);
-    console.log(this.guest.token);
-    
-    // this.guestService.newGuest(this.guest)
-    // this.router.navigate(['view-rooms-list'])
+    this.presentToast('bottom','Se agregó el huesped correctamente');
+    this.guestService.newGuest(this.guest)
+    this.router.navigate(['view-rooms-list'])
   }
 
   private createToken(data):string{
@@ -91,5 +90,15 @@ export class NewGuestPage implements OnInit {
     }
     token +=str;
     return token;
+  }
+
+  public async presentToast(position: 'top' | 'middle' | 'bottom', message: string) {
+    const toast = await this.toast.create({
+      message,
+      duration: 1500,
+      position,
+      cssClass: 'custom-toast',
+    });
+    await toast.present();
   }
 }
