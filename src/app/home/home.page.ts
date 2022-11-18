@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { ToastController } from '@ionic/angular';
@@ -18,64 +18,74 @@ export class HomePage {
   private ADMIN = 'ADMI0000'
 
   constructor(
-    private guestService:GuestService,
+    private guestService: GuestService,
     private fb: FormBuilder,
     private toast: ToastController,
     private route: Router) { }
 
-    ngOnInit() {
-      this.myForm = this.fb.group(
-        {
-          token: ["", Validators.compose([Validators.required,
-          Validators.minLength(8),
-          Validators.maxLength(8)])]
-        }
-      );
-      this.validationMessages = {
-        "token": [
-          {
-            "type": "required",
-            "message": "Token obligatorio"
-          },
-          {
-            "type": "minlength",
-            "message": "El Token debe ser de 8 dígitos"
-          },
-          {
-            "type": "maxlength",
-            "message": "El Token debe ser de 8 dígitos"
-          }
-        ]
+  ngOnInit() {
+    this.myForm = this.fb.group(
+      {
+        token: ["", Validators.compose([Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(8)])]
       }
+    );
+    this.validationMessages = {
+      "token": [
+        {
+          "type": "required",
+          "message": "Token obligatorio"
+        },
+        {
+          "type": "minlength",
+          "message": "El Token debe ser de 8 dígitos"
+        },
+        {
+          "type": "maxlength",
+          "message": "El Token debe ser de 8 dígitos"
+        }
+      ]
     }
-  
+  }
 
-  goAdminPage(){
+
+  goAdminPage() {
     this.route.navigate(['view-rooms-list'])
   }
 
-  goGuestPage(){
-    this.route.navigate(['tabs'])
+  goGuestPage(token:string) {
+    this.route.navigate(['tabs'],
+    {
+      queryParams:{token:token}
+    })
   }
 
-  public login(data){
+  clic() {
+    if (this.myForm.valid)
+    this.login(this.myForm.value)
+    else
+    this.presentToast('bottom','Ingrese correctamente el token')
+  }
+
+  public login(data) {
     const token = data.token;
-    if(token===this.ADMIN){
+    if (token === this.ADMIN) {
       this.goAdminPage();
-      this.presentToast('bottom','Bienvenido administrador');
-    }else{
+      this.presentToast('bottom', 'Bienvenido administrador');
+    } else {
       const guest = this.guestService.getGuestByToken(token);
-      if(guest){
-        this.goGuestPage();
-        this.presentToast('bottom',`Bienvenido ${guest.name}`);
+      if (guest) {
+        this.goGuestPage(guest.token);
+        this.presentToast('bottom', `Bienvenido ${guest.name}`);
       }
-      else{
-        this.presentToast('bottom','No exite un huesped con ese token')
-        
+      else {
+        this.presentToast('bottom', 'No exite un huesped con ese token')
+
       }
     }
   }
-  public async presentToast(position: 'top' | 'middle' | 'bottom', message:string) {
+  public async presentToast(position: 'top' | 'middle' | 'bottom', message: string) {
     const toast = await this.toast.create({
       message,
       duration: 1500,

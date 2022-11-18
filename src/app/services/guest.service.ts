@@ -13,24 +13,24 @@ export class GuestService {
       {
         token:'DAON1001',
         name:'Daniel Calderón',
-        date_in : '16-11-1999',
-        date_out : '16-11-1999',
+        date_in : '16-11-2022',
+        date_out : '19-11-2022',
         phone:'3111590913',
         room:23
       },
       {
         token:'ANMO1002',
         name:'Antonio Moreno',
-        date_in : '16-11-1999',
-        date_out : '16-11-1999',
+        date_in : '01-12-2022',
+        date_out : '07-13-2022',
         phone:'3111590913',
         room:24
       },
       {
         token:'SELO1003',
         name:'Segio Carrillo',
-        date_in : '16-11-1909',
-        date_out : '16-11-1909',
+        date_in : '16-11-2022',
+        date_out : '21-12-2022',
         phone:'3111590913',
         room:25
       }
@@ -51,5 +51,9 @@ export class GuestService {
     return this.guests.find(guest=>{
       return guest.token === token;
     });
+  }
+
+  public removeGuest(pos:number){
+    return this.guests.splice(pos,1);
   }
 }
