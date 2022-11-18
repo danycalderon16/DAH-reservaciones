@@ -27,9 +27,9 @@ export class NewGuestPage implements OnInit {
   ngOnInit() {
     this.myForm = this.fb.group(
       {
-        room: [23, Validators.compose([Validators.required,Validators.min(1)])],
-        name: ["Luis Sergio", Validators.required],
-        phone: ["3111590913", Validators.compose([Validators.required, Validators.minLength(10),Validators.maxLength(10)])],
+        room: ['', Validators.compose([Validators.required,Validators.min(1)])],
+        name: ["", Validators.required],
+        phone: ["", Validators.compose([Validators.required, Validators.minLength(10),Validators.maxLength(10)])],
         date_in: ["", Validators.compose([Validators.required])],
         date_out: ["", Validators.compose([Validators.required])]
       }
