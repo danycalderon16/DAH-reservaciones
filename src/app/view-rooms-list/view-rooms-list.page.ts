@@ -13,7 +13,7 @@ import { GuestService } from '../services/guest.service';
 export class ViewRoomsListPage implements OnInit {
 
   public guests: Guest[];
-  public url:string;
+  public url: string;
 
   constructor(
     private guestService: GuestService,
@@ -49,7 +49,7 @@ export class ViewRoomsListPage implements OnInit {
           handler: () => {
             this.guestService.removeGuest(pos);
             this.guests = this.guestService.getGuests();
-           this.presentToast('bottom','Se elimino correctamente el huesped');
+            this.presentToast('bottom', 'Se elimino correctamente el huesped');
           }
         }
       ]
@@ -67,10 +67,14 @@ export class ViewRoomsListPage implements OnInit {
     await toast.present();
   }
 
-  public getToken(token:string, tel:string):void{
-     
-      this.url="https://api.whatsapp.com/send?phone=52"+tel+"&text=Bienvenido.%20Tu%20token%20para%20ingresar%20es%20"+token;
-      window.open(this.url,'_system','location=yes');
+  public getToken(token: string, tel: string): void {
+
+    this.url = "https://api.whatsapp.com/send?phone=52" + tel + "&text=Bienvenido.%20Tu%20token%20para%20ingresar%20es%20" + token;
+    window.open(this.url, '_system', 'location=yes');
+  }
+
+  logOut() {
+    this.router.navigate(['home']);
   }
 
 }

@@ -7,6 +7,7 @@ import { Guest } from '../models/guest';
 export class GuestService {
 
   private guests : Guest[];
+  private currentGuest:Guest;
 
   constructor() { 
     this.guests = [
@@ -55,5 +56,13 @@ export class GuestService {
 
   public removeGuest(pos:number){
     return this.guests.splice(pos,1);
+  }
+
+  public setCurrentGuest(guest:Guest):void{
+    this.currentGuest = guest;
+  }
+
+  public getCurrentUser():Guest{
+    return this.currentGuest;
   }
 }

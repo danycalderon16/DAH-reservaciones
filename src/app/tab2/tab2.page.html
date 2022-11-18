@@ -1,9 +1,43 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>tab2</ion-title>
+    <ion-title>Hotel</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logOut()">
+        SALIR
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="!show">
+  <div class="advice">
+    <ion-text color="primary">
+      <h1>No está en el periodo reservado</h1>
+    </ion-text>
+  </div>
+</ion-content>
 
+<ion-content *ngIf="show">
+  <div class="content-wrapper">
+    <div class="content-body ">
+      <ion-list>
+        <ion-item>
+          <ion-label><strong>Ubicación</strong></ion-label>
+          <p>Domicilio Conocido, 63865 La Laguna, Nay.</p>
+        </ion-item>
+        <ion-item>
+          <ion-label><strong>Hora de entrada</strong></ion-label>
+          <p>12 P.M.</p>
+        </ion-item>
+        <ion-item>
+          <ion-label><strong>Hora de salida</strong></ion-label>
+          <p>10 A.M.</p>
+        </ion-item>
+        <ion-item>
+          <ion-label><strong>Clave de acceso</strong></ion-label>
+          <p>{{key}}</p>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
 </ion-content>
