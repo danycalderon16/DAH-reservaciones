@@ -67,7 +67,9 @@
 
             <ion-modal [keepContentsMounted]="true">
               <ng-template>
-                <ion-datetime id="date_in" presentation="date" [showDefaultButtons]="true" formControlName="date_in"></ion-datetime>
+                <ion-datetime id="date_in" presentation="date" value={{minDate}} 
+                [showDefaultButtons]="true" formControlName="date_in" min={{minDate}}
+                (ionChange)="change()"></ion-datetime>
               </ng-template>
             </ion-modal>          
           <div>
@@ -80,7 +82,8 @@
           </div>
         </ion-col>
       </ion-row>
-      <ion-row>
+      <ion-row
+        *ngIf="showCalendarOut">
         <ion-col>
             <ion-item>
               <ion-label>Fecha salida</ion-label>
@@ -89,7 +92,10 @@
 
             <ion-modal [keepContentsMounted]="true">
               <ng-template>
-                <ion-datetime id="date_out" presentation="date" [showDefaultButtons]="true" formControlName="date_out"></ion-datetime>
+                <ion-datetime id="date_out" presentation="date" [showDefaultButtons]="true" formControlName="date_out"
+                min={{minDateOut}}
+                value={{minDateOut}}
+                ></ion-datetime>
               </ng-template>
             </ion-modal>
           

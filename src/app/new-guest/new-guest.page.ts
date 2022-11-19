@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Guest } from '../models/guest';
 import { GuestService } from '../services/guest.service';
 import { format, parseISO } from 'date-fns';
+import { RoomService } from '../services/room.service';
 
 @Component({
   selector: 'app-new-guest',
@@ -13,8 +14,13 @@ import { format, parseISO } from 'date-fns';
 })
 export class NewGuestPage implements OnInit {
 
-  today: any;
-  selectedDate: any;
+  public today: any;
+  public selectedDate: any;
+  public minDate: any = new Date().toISOString();
+  public dateIn:Date;
+  public showCalendarOut = false;
+  public minDateOut:any;
+
   public guest: Guest;
   public myForm: FormGroup;
   public validationMessages: Object;
@@ -22,16 +28,17 @@ export class NewGuestPage implements OnInit {
   constructor(private guestService:GuestService,
     private fb: FormBuilder,
     private toast:ToastController,
-    private router:Router) { }
+    private router:Router,
+    private roomService:RoomService,) { }
 
   ngOnInit() {
     this.myForm = this.fb.group(
       {
-        room: ['', Validators.compose([Validators.required,Validators.min(1)])],
-        advanced_payment: ['', Validators.compose([Validators.required,Validators.min(1)])],
-        room_cost: ['', Validators.compose([Validators.required,Validators.min(1)])],
-        name: ["", Validators.required],
-        phone: ["", Validators.compose([Validators.required, Validators.minLength(10),Validators.maxLength(10)])],
+        room: ['23', Validators.compose([Validators.required,Validators.min(1)])],
+        advanced_payment: ['1400', Validators.compose([Validators.required,Validators.min(1)])],
+        room_cost: ['2000', Validators.compose([Validators.required,Validators.min(1)])],
+        name: ["Daniel", Validators.required],
+        phone: ["3111590913", Validators.compose([Validators.required, Validators.minLength(10),Validators.maxLength(10)])],
         date_in: ["", Validators.compose([Validators.required])],
         date_out: ["", Validators.compose([Validators.required])]
       }
@@ -66,13 +73,32 @@ export class NewGuestPage implements OnInit {
         { type: 'required', message: 'El costo es obligatorio' },
         { type: 'min', message: 'El costo no puede ser 0' }
       ],
-    }
+    }        
+  }
+
+  change(){
+    this.showCalendarOut = true;
+    let auxDate = new Date(this.myForm.value.date_in)
+    let newDate = new Date()
+    newDate.setDate(auxDate.getDate()+1)
+    this.minDateOut = newDate.toISOString();
+
+    console.log(auxDate);
+    console.log(this.minDate);
+    console.log(this.minDateOut);
+    
+            
   }
 
   public newGuest(data):void{
+    if(this.roomService.isReserved(parseInt(data.room),data.date_in)){
+      this.presentToast('bottom',"La habitación ya está reservada en esas fechas");
+      return;
+    }
+
     let date_in = data.date_in;
     let formattedString = format(parseISO(date_in), 'dd-MM-yyyy');
-     this.guest = data;
+    this.guest = data;
     this.guest.date_in = formattedString;
     let date_out = data.date_out;
     formattedString = format(parseISO(date_out), 'dd-MM-yyyy');
@@ -83,7 +109,7 @@ export class NewGuestPage implements OnInit {
     this.guest.token = this.createToken(data);
     this.presentToast('bottom','Se agregó el huesped correctamente');
     this.guestService.newGuest(this.guest)
-    this.router.navigate(['view-rooms-list'])
+    // this.router.navigate(['view-rooms-list'])
   }
 
   private createToken(data):string{
@@ -105,7 +131,7 @@ export class NewGuestPage implements OnInit {
   public async presentToast(position: 'top' | 'middle' | 'bottom', message: string) {
     const toast = await this.toast.create({
       message,
-      duration: 1500,
+      duration: 2000,
       position,
       cssClass: 'custom-toast',
     });
