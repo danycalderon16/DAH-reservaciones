@@ -14,8 +14,8 @@ export class GuestService {
       {
         token:'DAON1001',
         name:'Daniel Calderón',
-        date_in : '16-11-2022',
-        date_out : '19-11-2022',
+        date_in : '25-11-2022',
+        date_out : '29-11-2022',
         phone:'3111590913',
         room:23
       },
@@ -30,8 +30,8 @@ export class GuestService {
       {
         token:'SELO1003',
         name:'Segio Carrillo',
-        date_in : '16-11-2022',
-        date_out : '21-12-2022',
+        date_in : '30-11-2022',
+        date_out : '5-12-2022',
         phone:'3111590913',
         room:25
       }
