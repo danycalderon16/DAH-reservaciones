@@ -28,6 +28,8 @@ export class NewGuestPage implements OnInit {
     this.myForm = this.fb.group(
       {
         room: ['', Validators.compose([Validators.required,Validators.min(1)])],
+        advanced_payment: ['', Validators.compose([Validators.required,Validators.min(1)])],
+        room_cost: ['', Validators.compose([Validators.required,Validators.min(1)])],
         name: ["", Validators.required],
         phone: ["", Validators.compose([Validators.required, Validators.minLength(10),Validators.maxLength(10)])],
         date_in: ["", Validators.compose([Validators.required])],
@@ -55,6 +57,14 @@ export class NewGuestPage implements OnInit {
       "room": [
         { type: 'required', message: 'La habitación es obligatoria' },
         { type: 'min', message: 'La habitación no puede ser 0' }
+      ],
+      "advanced_payment": [
+        { type: 'required', message: 'El anticipo es obligatorio' },
+        { type: 'min', message: 'El anticipo no puede ser 0' }
+      ],
+      "room_cost": [
+        { type: 'required', message: 'El costo es obligatorio' },
+        { type: 'min', message: 'El costo no puede ser 0' }
       ],
     }
   }

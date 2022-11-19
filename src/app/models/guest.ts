@@ -4,5 +4,8 @@ export class Guest{
     phone: string;
     date_in:string;
     date_out:string;
-    room:number
+    room:number;
+    room_cost:number;
+    advance_payment:number;
+    remainder:number;
 }

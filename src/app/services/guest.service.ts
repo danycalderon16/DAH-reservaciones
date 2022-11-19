@@ -17,7 +17,10 @@ export class GuestService {
         date_in : '25-11-2022',
         date_out : '29-11-2022',
         phone:'3111590913',
-        room:23
+        room:23,
+        room_cost:2500,
+        advance_payment:1000,
+        remainder:1500
       },
       {
         token:'ANMO1002',
@@ -25,7 +28,10 @@ export class GuestService {
         date_in : '01-12-2022',
         date_out : '07-13-2022',
         phone:'3111590913',
-        room:24
+        room:24,
+        room_cost:2500,
+        advance_payment:1000,
+        remainder:1500
       },
       {
         token:'SELO1003',
@@ -33,7 +39,10 @@ export class GuestService {
         date_in : '30-11-2022',
         date_out : '5-12-2022',
         phone:'3111590913',
-        room:25
+        room:25,
+        room_cost:2500,
+        advance_payment:1000,
+        remainder:1500
       }
     ]
   }
@@ -47,8 +56,6 @@ export class GuestService {
   }
 
   public getGuestByToken(token:string):Guest{
-    // let guest: Guest;
-
     return this.guests.find(guest=>{
       return guest.token === token;
     });

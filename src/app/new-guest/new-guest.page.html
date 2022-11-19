@@ -45,7 +45,7 @@
       <ion-row>
         <ion-col>
           <ion-item>
-            <ion-label position="floating">Room</ion-label>
+            <ion-label position="floating">Habitación</ion-label>
             <ion-input type="text" formControlName="room"></ion-input>
           </ion-item>
           <div>
@@ -97,6 +97,38 @@
             <ng-container *ngFor="let item of validationMessages['date_out']">
               <div class="errormessage" *ngIf="(myForm.get('date_out').dirty || 
               myForm.get('date_out').touched) && myForm.get('date_out').hasError(item.type) ">
+              {{item.message}}
+              </div>
+            </ng-container>
+          </div>
+        </ion-col>
+      </ion-row>     
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Costo</ion-label>
+            <ion-input type="number" formControlName="room_cost"></ion-input>
+          </ion-item>
+          <div>
+            <ng-container *ngFor="let item of validationMessages['room_cost']">
+              <div class="errormessage" *ngIf="(myForm.get('room_cost').dirty || 
+              myForm.get('room_cost').touched) && myForm.get('room_cost').hasError(item.type) ">
+              {{item.message}}
+              </div>
+            </ng-container>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Anticipo</ion-label>
+            <ion-input type="number" formControlName="advanced_payment"></ion-input>
+          </ion-item>
+          <div>
+            <ng-container *ngFor="let item of validationMessages['advanced_payment']">
+              <div class="errormessage" *ngIf="(myForm.get('advanced_payment').dirty || 
+              myForm.get('advanced_payment').touched) && myForm.get('advanced_payment').hasError(item.type) ">
               {{item.message}}
               </div>
             </ng-container>
