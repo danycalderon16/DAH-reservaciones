@@ -28,18 +28,18 @@ export class NewGuestPage implements OnInit {
   constructor(private guestService:GuestService,
     private fb: FormBuilder,
     private toast:ToastController,
-    private router:Router,
+    private route:Router,
     private roomService:RoomService,) { }
 
   ngOnInit() {
     this.myForm = this.fb.group(
       {
-        room: ['23', Validators.compose([Validators.required,Validators.min(1)])],
+        room: ['20', Validators.compose([Validators.required,Validators.min(1)])],
         advanced_payment: ['1400', Validators.compose([Validators.required,Validators.min(1)])],
         room_cost: ['2000', Validators.compose([Validators.required,Validators.min(1)])],
         name: ["Daniel", Validators.required],
         phone: ["3111590913", Validators.compose([Validators.required, Validators.minLength(10),Validators.maxLength(10)])],
-        date_in: ["", Validators.compose([Validators.required])],
+        date_in: [this.minDateOut, Validators.compose([Validators.required])],
         date_out: ["", Validators.compose([Validators.required])]
       }
     );
@@ -83,35 +83,29 @@ export class NewGuestPage implements OnInit {
     newDate.setDate(auxDate.getDate()+1)
     this.minDateOut = newDate.toISOString();
 
-    console.log(auxDate);
     console.log(this.minDate);
-    console.log(this.minDateOut);
-    
-            
+    console.log(this.minDateOut,typeof(this.minDateOut));           
   }
 
   public newGuest(data):void{
     if(this.roomService.isReserved(parseInt(data.room),data.date_in)){
-      this.presentToast('bottom',"La habitación ya está reservada en esas fechas");
-      return;
+      this.presentToast('bottom',"La habitación ya está reservada en esas fechas");      
     }
-
-    let date_in = data.date_in;
-    let formattedString = format(parseISO(date_in), 'dd-MM-yyyy');
-    this.guest = data;
-    this.guest.date_in = formattedString;
-    let date_out = data.date_out;
-    formattedString = format(parseISO(date_out), 'dd-MM-yyyy');
-    this.guest.date_out = formattedString;
-    if(date_in>date_out){
-      return console.log('La fecha esta mal');      
+    else{
+      let date_in = data.date_in;
+      let formattedString = format(parseISO(date_in), 'dd-MM-yyyy');
+      this.guest = data;
+      this.guest.date_in = formattedString;
+      let date_out = data.date_out;
+      formattedString = format(parseISO(date_out), 'dd-MM-yyyy');
+      this.guest.date_out = formattedString;
+      this.guest.token = this.createToken(data);
+      this.guestService.newGuest(this.guest)
+      this.goAdminPage();
+      this.presentToast('bottom','Se agregó el huesped correctamente');
     }
-    this.guest.token = this.createToken(data);
-    this.presentToast('bottom','Se agregó el huesped correctamente');
-    this.guestService.newGuest(this.guest)
-    // this.router.navigate(['view-rooms-list'])
   }
-
+  
   private createToken(data):string{
     let token = '';
     token = (data.name.substring(0,2)+data.name.slice(-2)).toUpperCase();
@@ -136,5 +130,10 @@ export class NewGuestPage implements OnInit {
       cssClass: 'custom-toast',
     });
     await toast.present();
+  }
+
+  goAdminPage() {
+    console.log('goadmin');    
+    this.route.navigate(['view-rooms-list'])
   }
 }

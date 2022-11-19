@@ -47,19 +47,18 @@ export class RoomService {
   isReserved(num: number,date_in:string): boolean {    
     let room = this.getReservedRoom(num);
     console.log("room",room);
+    console.log("fecha entrada",date_in);
     if(room == undefined){
        console.log('no hay reservación');      
-       return;
+       return false;
     }   
-    return this.validateDates(room.date_out,date_in)
+    return this.isAvalible(room.date_out,date_in)
     
   }
 
-  isAvallible(num: number): boolean {
-    return !this.rooms.some(room=>room.number_room===num)
-  }
-
-  validateDates(date_out:string,date_in:string):boolean{
-    return date_in<date_out;
+  isAvalible(date_out:string,date_in:string):boolean{
+    console.log("In:"+date_in,". Out:",date_out);
+    console.log(date_in<date_out);
+    return date_in>=date_out;
   }
 }
