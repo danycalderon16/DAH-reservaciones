@@ -22,8 +22,20 @@
     <div class="content-body ">
       <ion-list>
         <ion-item>
+          <ion-label><strong>Huesped</strong></ion-label>
+          <p>{{guest.name}}</p>
+        </ion-item>
+        <ion-item>
           <ion-label><strong>Ubicación</strong></ion-label>
           <p>Domicilio Conocido, 63865 La Laguna, Nay.</p>
+        </ion-item>
+        <ion-item>
+          <ion-label><strong>Fecha Ingreso</strong></ion-label>
+          <p>{{dateIn | date:'mediumDate'}}</p>
+        </ion-item>
+        <ion-item>
+          <ion-label><strong>Fecha Salida</strong></ion-label>
+          <p>{{dateOut | date:'mediumDate'}}</p>
         </ion-item>
         <ion-item>
           <ion-label><strong>Hora de entrada</strong></ion-label>
@@ -32,6 +44,15 @@
         <ion-item>
           <ion-label><strong>Hora de salida</strong></ion-label>
           <p>10 A.M.</p>
+        </ion-item>
+        <ion-item>
+          <ion-label><strong>Anticipo</strong></ion-label>
+          <ion-label class="ion-text-end" color="success">{{guest.advanced_payment | currency}}</ion-label>
+          
+          </ion-item>
+        <ion-item>
+          <ion-label><strong>Faltante</strong></ion-label>
+          <ion-label class="ion-text-end" color="danger">{{guest.remainder | currency}}</ion-label>
         </ion-item>
         <ion-item>
           <ion-label><strong>Clave de acceso</strong></ion-label>

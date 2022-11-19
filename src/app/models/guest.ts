@@ -6,6 +6,6 @@ export class Guest{
     date_out:string;
     room:number;
     room_cost:number;
-    advance_payment:number;
+    advanced_payment:number;
     remainder:number;
 }

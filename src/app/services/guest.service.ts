@@ -14,12 +14,12 @@ export class GuestService {
       {
         token:'DAON1001',
         name:'Daniel Calderón',
-        date_in : '25-11-2022',
+        date_in : '15-11-2022',
         date_out : '29-11-2022',
         phone:'3111590913',
         room:23,
         room_cost:2500,
-        advance_payment:1000,
+        advanced_payment:1000,
         remainder:1500
       },
       {
@@ -30,7 +30,7 @@ export class GuestService {
         phone:'3111590913',
         room:24,
         room_cost:2500,
-        advance_payment:1000,
+        advanced_payment:1000,
         remainder:1500
       },
       {
@@ -41,7 +41,7 @@ export class GuestService {
         phone:'3111590913',
         room:25,
         room_cost:2500,
-        advance_payment:1000,
+        advanced_payment:1000,
         remainder:1500
       }
     ]

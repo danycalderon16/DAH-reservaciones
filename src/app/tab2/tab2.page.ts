@@ -10,8 +10,10 @@ import { GuestService } from '../services/guest.service';
 })
 export class Tab2Page implements OnInit {
 
-  private guest: Guest;
-  private todaysDate = new Date()
+  public guest: Guest;
+  public todaysDate = new Date()
+  public dateIn:Date;
+  public dateOut:Date;
 
   public show:boolean;
   public key:string
@@ -19,9 +21,22 @@ export class Tab2Page implements OnInit {
   constructor(private guestService: GuestService,private router:Router) { }
 
   ngOnInit() {
+    this.guestService.setCurrentGuest(this.guestService.getGuestByToken('DAON1001'));
     this.guest = this.guestService.getCurrentUser();
     this.dateComparator();
     this.key = this.generateKet();
+    let array = this.guest.date_in.split('-');
+    let aux = array[2];
+    array[2] = array[0];
+    array[0] = aux
+    let str = array[0]+"-"+array[1]+"-"+array[2] 
+    this.dateIn = new Date(str);
+    array = this.guest.date_out.split('-');
+    aux = array[2];
+    array[2] = array[0];
+    array[0] = aux
+    str = array[0]+"-"+array[1]+"-"+array[2] 
+    this.dateOut = new Date(str);
   }
 
   private dateComparator():void{

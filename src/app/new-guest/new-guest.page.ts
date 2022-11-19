@@ -94,12 +94,16 @@ export class NewGuestPage implements OnInit {
     else{
       let date_in = data.date_in;
       let formattedString = format(parseISO(date_in), 'dd-MM-yyyy');
-      this.guest = data;
+      this.guest = data;      
+      this.guest.advanced_payment = parseInt(data.advanced_payment);
+      this.guest.remainder = this.guest.room_cost-this.guest.advanced_payment;
+      this.guest.room_cost = parseInt(data.room_cost);
       this.guest.date_in = formattedString;
       let date_out = data.date_out;
       formattedString = format(parseISO(date_out), 'dd-MM-yyyy');
       this.guest.date_out = formattedString;
       this.guest.token = this.createToken(data);
+      console.log(this.guest);      
       this.guestService.newGuest(this.guest)
       this.goAdminPage();
       this.presentToast('bottom','Se agregó el huesped correctamente');
