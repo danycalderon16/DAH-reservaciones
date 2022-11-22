@@ -36,7 +36,7 @@ export class Tab2Page implements OnInit {
 
   ngOnInit() {
     this.language=this.guestService.getLanguage();
-    this.guestService.setCurrentGuest(this.guestService.getGuestByToken('DAON1001'));
+    // this.guestService.setCurrentGuest(this.guestService.getGuestByToken('DAON1001'));
     this.guest = this.guestService.getCurrentUser();
     this.dateComparator();
     this.key = this.generateKet();
