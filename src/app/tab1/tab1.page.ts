@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { Guest } from '../models/guest';
 import { GuestService } from '../services/guest.service';
 
@@ -16,9 +17,24 @@ export class Tab1Page implements OnInit {
 
   public show:boolean;
 
-  constructor(private guestService: GuestService,private router:Router) { }
+  langs: string[]=[];
+  public language:string;
+
+  constructor(private guestService: GuestService,private router:Router,
+     private translateService: TranslateService) { 
+    this.langs= this.translateService.getLangs();
+    translateService.use(guestService.getLanguage());
+    this.language=guestService.getLanguage();
+  }
+
+  changeLang(event){
+    this.guestService.setLanguage(event.detail.value);
+    this.translateService.use(event.detail.value);   
+    this.language = this.guestService.getLanguage()
+  }
 
   ngOnInit() {
+    this.language=this.guestService.getLanguage();
     this.guest = this.guestService.getCurrentUser();
     this.dateComparator()
   }

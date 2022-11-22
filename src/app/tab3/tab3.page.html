@@ -2,6 +2,14 @@
   <ion-toolbar>
     <ion-title>{{"HOTEL"| translate}}</ion-title>
     <ion-buttons slot="end">
+      <ion-label>{{"IDIOMA"| translate}}</ion-label>
+      <ion-select cancelText='{{"CANCELAR"| translate}}'
+      placeholder="Selecciona" (ionChange)="changeLang($event)"       
+       [ngModel]="language">
+        <ion-select-option *ngFor="let lang of langs">{{lang}}</ion-select-option>
+      </ion-select>
+    </ion-buttons>
+    <ion-buttons slot="end">
       <ion-button (click)="logOut()">
         {{"SALIR"| translate}}
       </ion-button>

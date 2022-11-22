@@ -19,17 +19,23 @@ export class Tab2Page implements OnInit {
   public show:boolean;
   public key:string
   langs: string[]=[];
+  public language:string;
 
-  constructor(private guestService: GuestService,private router:Router, private translateService: TranslateService) { 
+  constructor(private guestService: GuestService,private router:Router,
+     private translateService: TranslateService) { 
     this.langs= this.translateService.getLangs();
+    translateService.use(guestService.getLanguage());
+    this.language=guestService.getLanguage();
   }
 
   changeLang(event){
-    this.translateService.use(event.detail.value);
-    console.log(event.detail.value);
+    this.guestService.setLanguage(event.detail.value);
+    this.translateService.use(event.detail.value);     
+    this.language = this.guestService.getLanguage()
   }
 
   ngOnInit() {
+    this.language=this.guestService.getLanguage();
     this.guestService.setCurrentGuest(this.guestService.getGuestByToken('DAON1001'));
     this.guest = this.guestService.getCurrentUser();
     this.dateComparator();

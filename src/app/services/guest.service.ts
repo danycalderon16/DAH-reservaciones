@@ -8,8 +8,10 @@ export class GuestService {
 
   private guests : Guest[];
   private currentGuest:Guest;
+  private language : string;
 
   constructor() { 
+    this.language = "ingles"
     this.guests = [
       {
         token:'DAON1001',
@@ -71,5 +73,13 @@ export class GuestService {
 
   public getCurrentUser():Guest{
     return this.currentGuest;
+  }
+
+  public getLanguage():string{
+    return this.language;
+  }
+
+  public setLanguage(value:string):void{
+    this.language = value;
   }
 }
