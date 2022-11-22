@@ -41,11 +41,11 @@ export class NewGuestPage implements OnInit {
   ngOnInit() {
     this.myForm = this.fb.group(
       {
-        room: ['33', Validators.compose([Validators.required,Validators.min(1)])],
-        advanced_payment: ['1333', Validators.compose([Validators.required,Validators.min(1)])],
-        room_cost: ['1299', Validators.compose([Validators.required,Validators.min(1)])],
-        name: ["Ney", Validators.required],
-        phone: ["3111234321", Validators.compose([Validators.required, Validators.minLength(10),Validators.maxLength(10)])],
+        room: ['', Validators.compose([Validators.required,Validators.min(1)])],
+        advanced_payment: ['', Validators.compose([Validators.required,Validators.min(1)])],
+        room_cost: ['', Validators.compose([Validators.required,Validators.min(1)])],
+        name: ["", Validators.required],
+        phone: ["", Validators.compose([Validators.required, Validators.minLength(10),Validators.maxLength(10)])],
         date_in: [this.minDateOut, Validators.compose([Validators.required])],
         date_out: ["", Validators.compose([Validators.required])],
         language: ["", Validators.required]
