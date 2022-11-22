@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Guest } from '../models/guest';
 import { GuestService } from '../services/guest.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-tab2',
@@ -17,8 +18,16 @@ export class Tab2Page implements OnInit {
 
   public show:boolean;
   public key:string
+  langs: string[]=[];
 
-  constructor(private guestService: GuestService,private router:Router) { }
+  constructor(private guestService: GuestService,private router:Router, private translateService: TranslateService) { 
+    this.langs= this.translateService.getLangs();
+  }
+
+  changeLang(event){
+    this.translateService.use(event.detail.value);
+    console.log(event.detail.value);
+  }
 
   ngOnInit() {
     this.guestService.setCurrentGuest(this.guestService.getGuestByToken('DAON1001'));

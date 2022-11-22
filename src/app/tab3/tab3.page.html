@@ -1,9 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Hotel</ion-title>
+    <ion-title>{{"HOTEL"| translate}}</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="logOut()">
-        SALIR
+        {{"SALIR"| translate}}
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -15,35 +15,35 @@
       <ion-accordion-group [multiple]="true">
         <ion-accordion value="first">
           <ion-item slot="header" color="light">
-            <ion-label>Actividades</ion-label>
+            <ion-label>{{"ACTIVIDADES"| translate}}</ion-label>
           </ion-item>
           <div class="ion-padding" slot="content">
             <ion-list [inset]="true">
               <ion-item>
-                <ion-label>Eventos Deportivos</ion-label>
+                <ion-label>{{"EVENTOS"| translate}}</ion-label>
               </ion-item>
               <ion-item>
-                <ion-label>Paseos</ion-label>
+                <ion-label>{{"PASEOS"| translate}}</ion-label>
               </ion-item>
               <ion-item>
-                <ion-label>Lancha</ion-label>
+                <ion-label>{{"LANCHA"| translate}}</ion-label>
               </ion-item>
               <ion-item>
-                <ion-label>Eventos de Gala</ion-label>
+                <ion-label>{{"GALA"| translate}}</ion-label>
               </ion-item>
             </ion-list>
           </div>
         </ion-accordion>
         <ion-accordion value="second">
           <ion-item slot="header" color="light">
-            <ion-label>Recomendaciones</ion-label>
+            <ion-label>{{"RECOMENDACIONES"| translate}}</ion-label>
           </ion-item>
           <div class="ion-padding" slot="content">
             <ion-list [inset]="true">
               <ion-accordion-group [multiple]="true">
                 <ion-accordion value="first">
                   <ion-item slot="header" color="light">
-                    <ion-label>Restaurantes</ion-label>
+                    <ion-label>{{"RESTAURANTES"| translate}}</ion-label>
                   </ion-item>
                   <div class="ion-padding" slot="content">
                     <ion-list>
@@ -61,7 +61,7 @@
                 </ion-accordion>
                 <ion-accordion value="second">
                   <ion-item slot="header" color="light">
-                    <ion-label>Club Campestre</ion-label>
+                    <ion-label>{{"CLUB"| translate}}</ion-label>
                   </ion-item>
                   <div class="ion-padding" slot="content">
                     <ion-list>
@@ -73,7 +73,7 @@
                 </ion-accordion>
                 <ion-accordion value="third">
                   <ion-item slot="header" color="light">
-                    <ion-label>Sitios</ion-label>
+                    <ion-label>{{"SITIOS"| translate}}</ion-label>
                   </ion-item>
                   <div class="ion-padding" slot="content">
                     <ion-list>
@@ -95,32 +95,25 @@
         </ion-accordion>
         <ion-accordion value="third">
           <ion-item slot="header" color="light" class="item-text-wrap">
-            <ion-label>Historia</ion-label>
+            <ion-label>{{"HISTORIA"| translate}}</ion-label>
           </ion-item>
           <div class="ion-padding" slot="content">
             <ion-item class="item-text-wrap">
               <p style="text-align: justify;">
-                Una leyenda de desamor rodea este bello lugar. 
-                Se dice que el rey de Michiztlán, un poblado antiguo, 
-                tenía una hija hermosa. Ésta se enamoró de un hombre que 
-                formaba parte de un pueblo enemigo. El rey, al enterarse de esto, 
-                enfureció y mandó amarrar a ambos jóvenes a distintos postes cerca 
-                del cráter donde se encuentra la laguna. Al verse el uno al 
-                otro, pero sin poderse tocar, lloraron toda la noche hasta 
-                que sus lágrimas formaron la laguna.
+                {{"HISTORIATEXT"| translate}}
               </p>
             </ion-item>
           </div>
         </ion-accordion>
         <ion-accordion value="fourth">
           <ion-item slot="header" color="light">
-            <ion-label>Números de emergencia</ion-label>
+            <ion-label>{{"EMERGENCIA"| translate}}</ion-label>
           </ion-item>
           <div class="ion-padding" slot="content">
             <ion-list [inset]="true">
               <ion-item>
                 <ion-label>
-                  <strong>Bomberos:</strong>
+                  <strong>{{"BOMBEROS"| translate}}:</strong>
                 </ion-label>
                 <p style="text-align: justify;">
                   (311) 213-16-07
@@ -128,7 +121,7 @@
               </ion-item>
               <ion-item>
                 <ion-label>
-                  <strong>Policia:</strong>
+                  <strong>{{"POLICIA"| translate}}:</strong>
                 </ion-label>
                 <p style="text-align: justify;">
                   060
@@ -136,7 +129,7 @@
               </ion-item>
               <ion-item>
                 <ion-label>
-                  <strong>Emergencia:</strong>
+                  <strong>{{"EMERGENCIAS"| translate}}:</strong>
                 </ion-label>
                 <p style="text-align: justify;">
                   066

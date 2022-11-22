@@ -1,9 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Hotel</ion-title>
+    <ion-title>{{"HOTEL"| translate}}</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="logOut()">
-        SALIR
+        {{"SALIR"| translate}}
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -12,7 +12,7 @@
 <ion-content *ngIf="!show">
   <div class="advice">
     <ion-text color="primary">
-      <h1>No está en el periodo reservado</h1>
+      <h1>{{"PERIODO"| translate}}</h1>
     </ion-text>
   </div>
 </ion-content>
@@ -22,42 +22,50 @@
     <div class="content-body ">
       <ion-list>
         <ion-item>
-          <ion-label><strong>Huesped</strong></ion-label>
+          <ion-label><strong>{{"HUESPED"| translate}}</strong></ion-label>
           <p>{{guest.name}}</p>
         </ion-item>
         <ion-item>
-          <ion-label><strong>Ubicación</strong></ion-label>
+          <ion-label><strong>{{"UBICACION"| translate}}</strong></ion-label>
           <p>Domicilio Conocido, 63865 La Laguna, Nay.</p>
         </ion-item>
         <ion-item>
-          <ion-label><strong>Fecha Ingreso</strong></ion-label>
+          <ion-label><strong>{{"FECHAIN"| translate}}</strong></ion-label>
           <p>{{dateIn | date:'mediumDate'}}</p>
         </ion-item>
         <ion-item>
-          <ion-label><strong>Fecha Salida</strong></ion-label>
+          <ion-label><strong>{{"FECHAOU"| translate}}</strong></ion-label>
           <p>{{dateOut | date:'mediumDate'}}</p>
         </ion-item>
         <ion-item>
-          <ion-label><strong>Hora de entrada</strong></ion-label>
+          <ion-label><strong>{{"HORAEN"| translate}}</strong></ion-label>
           <p>12 P.M.</p>
         </ion-item>
         <ion-item>
-          <ion-label><strong>Hora de salida</strong></ion-label>
+          <ion-label><strong>{{"HORASAL"| translate}}</strong></ion-label>
           <p>10 A.M.</p>
         </ion-item>
         <ion-item>
-          <ion-label><strong>Anticipo</strong></ion-label>
+          <ion-label><strong>{{"ANTICIPO"| translate}}</strong></ion-label>
           <ion-label class="ion-text-end" color="success">{{guest.advanced_payment | currency}}</ion-label>
           
           </ion-item>
         <ion-item>
-          <ion-label><strong>Faltante</strong></ion-label>
+          <ion-label><strong>{{"FALTANTE"| translate}}</strong></ion-label>
           <ion-label class="ion-text-end" color="danger">{{guest.remainder | currency}}</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label><strong>Clave de acceso</strong></ion-label>
+          <ion-label><strong>{{"CLAVE"| translate}}</strong></ion-label>
           <p>{{key}}</p>
         </ion-item>
+
+        <ion-item>
+          <ion-label>{{"IDIOMA"| translate}}</ion-label>
+          <ion-select cancelText='{{"CANCELAR"| translate}}' placeholder="Selecciona" (ionChange)="changeLang($event)">
+            <ion-select-option *ngFor="let lang of langs">{{lang}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
       </ion-list>
     </div>
   </div>
