@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { Guest } from '../models/guest';
 import { GuestService } from '../services/guest.service';
 
 @Component({
@@ -10,12 +11,16 @@ import { GuestService } from '../services/guest.service';
 })
 export class Tab3Page implements OnInit {
 
+  public guest:Guest;
   langs: string[]=[];
   public language:string;
 
   constructor(private guestService: GuestService,private router:Router,
      private translateService: TranslateService) { 
-    this.langs= this.translateService.getLangs();
+    this.guest = this.guestService.getCurrentUser();
+    this.langs = this.translateService.getLangs();
+    guestService.setLanguage(this.guest.language);
+    this.language = guestService.getLanguage();
     translateService.use(guestService.getLanguage());
   }
   changeLang(event){
@@ -25,7 +30,6 @@ export class Tab3Page implements OnInit {
   }
 
   ngOnInit() {
-    this.language=this.guestService.getLanguage();
   }
   logOut(){
     this.router.navigate(['home']);

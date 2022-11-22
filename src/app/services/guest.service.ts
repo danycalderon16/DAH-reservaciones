@@ -11,7 +11,6 @@ export class GuestService {
   private language : string;
 
   constructor() { 
-    this.language = "ingles"
     this.guests = [
       {
         token:'DAON1001',
@@ -22,7 +21,8 @@ export class GuestService {
         room:23,
         room_cost:2500,
         advanced_payment:1000,
-        remainder:1500
+        remainder:1500,
+        language:'ingles'
       },
       {
         token:'ANMO1002',
@@ -33,7 +33,8 @@ export class GuestService {
         room:24,
         room_cost:2500,
         advanced_payment:1000,
-        remainder:1500
+        remainder:1500,
+        language:'español'
       },
       {
         token:'SELO1003',
@@ -44,7 +45,8 @@ export class GuestService {
         room:25,
         room_cost:2500,
         advanced_payment:1000,
-        remainder:1500
+        remainder:1500,
+        language:'español'
       }
     ]
   }

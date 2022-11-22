@@ -8,4 +8,5 @@ export class Guest{
     room_cost:number;
     advanced_payment:number;
     remainder:number;
+    language:string
 }

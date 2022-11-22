@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { ToastController } from '@ionic/angular';
 import { GuestService } from '../services/guest.service';
 import { Guest } from '../models/guest';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -22,7 +23,8 @@ export class HomePage {
     private guestService: GuestService,
     private fb: FormBuilder,
     private toast: ToastController,
-    private route: Router) { }
+    private route: Router,
+    private translateService:TranslateService) { }
 
   ngOnInit() {
     this.myForm = this.fb.group(
@@ -75,8 +77,10 @@ export class HomePage {
     } else {
       const guest = this.guestService.getGuestByToken(token);
       if (guest) {
+        console.log(guest);
+        this.translateService.use(guest.language);
+        this.presentToast('bottom', `${this.translateService.instant("BIENVENIDO")} ${guest.name}`);
         this.goGuestPage(guest);
-        this.presentToast('bottom', `Bienvenido ${guest.name}`);
       }
       else {
         this.presentToast('bottom', 'No exite un huesped con ese token')

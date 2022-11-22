@@ -6,6 +6,7 @@ import { Guest } from '../models/guest';
 import { GuestService } from '../services/guest.service';
 import { format, parseISO } from 'date-fns';
 import { RoomService } from '../services/room.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-new-guest',
@@ -25,22 +26,29 @@ export class NewGuestPage implements OnInit {
   public myForm: FormGroup;
   public validationMessages: Object;
 
+  public langs: string[]=[];
+
   constructor(private guestService:GuestService,
     private fb: FormBuilder,
     private toast:ToastController,
     private route:Router,
-    private roomService:RoomService,) { }
+    private roomService:RoomService,
+    private translateService: TranslateService) { 
+      this.langs= this.translateService.getLangs();
+      translateService.use('español');
+    }
 
   ngOnInit() {
     this.myForm = this.fb.group(
       {
-        room: ['', Validators.compose([Validators.required,Validators.min(1)])],
-        advanced_payment: ['', Validators.compose([Validators.required,Validators.min(1)])],
-        room_cost: ['', Validators.compose([Validators.required,Validators.min(1)])],
-        name: ["", Validators.required],
-        phone: ["", Validators.compose([Validators.required, Validators.minLength(10),Validators.maxLength(10)])],
+        room: ['33', Validators.compose([Validators.required,Validators.min(1)])],
+        advanced_payment: ['1333', Validators.compose([Validators.required,Validators.min(1)])],
+        room_cost: ['1299', Validators.compose([Validators.required,Validators.min(1)])],
+        name: ["Ney", Validators.required],
+        phone: ["3111234321", Validators.compose([Validators.required, Validators.minLength(10),Validators.maxLength(10)])],
         date_in: [this.minDateOut, Validators.compose([Validators.required])],
-        date_out: ["", Validators.compose([Validators.required])]
+        date_out: ["", Validators.compose([Validators.required])],
+        language: ["", Validators.required]
       }
     );
     this.validationMessages = {
@@ -59,6 +67,7 @@ export class NewGuestPage implements OnInit {
         }
       ],
       "name": [{ type: 'required', message: 'El nombre es obligatorio' }],
+      "language": [{ type: 'required', message: 'El lenguaje es obligatorio' }],
       "date_in": [{ type: 'required', message: 'La fecha de entrada es obligatoria' }],
       "date_out": [{ type: 'required', message: 'La fecha de salida es obligatoria' }],
       "room": [
@@ -85,6 +94,11 @@ export class NewGuestPage implements OnInit {
 
     console.log(this.minDate);
     console.log(this.minDateOut,typeof(this.minDateOut));           
+  }
+  
+  changeLang(event){
+    this.guestService.setLanguage(event.detail.value);
+    this.translateService.use(event.detail.value);   
   }
 
   public newGuest(data):void{

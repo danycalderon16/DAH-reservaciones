@@ -13,62 +13,63 @@ export class Tab2Page implements OnInit {
 
   public guest: Guest;
   public todaysDate = new Date()
-  public dateIn:Date;
-  public dateOut:Date;
+  public dateIn: Date;
+  public dateOut: Date;
 
-  public show:boolean;
-  public key:string
-  langs: string[]=[];
-  public language:string;
+  public show: boolean;
+  public key: string
+  langs: string[] = [];
+  public language: string;
 
-  constructor(private guestService: GuestService,private router:Router,
-     private translateService: TranslateService) { 
-    this.langs= this.translateService.getLangs();
+  constructor(private guestService: GuestService, private router: Router,
+    private translateService: TranslateService) {
+    this.guest = this.guestService.getCurrentUser();
+    this.langs = this.translateService.getLangs();
+    guestService.setLanguage(this.guest.language);
+    this.language = guestService.getLanguage();
     translateService.use(guestService.getLanguage());
-    this.language=guestService.getLanguage();
   }
 
-  changeLang(event){
+  changeLang(event) {
     this.guestService.setLanguage(event.detail.value);
-    this.translateService.use(event.detail.value);     
+    this.translateService.use(event.detail.value);
     this.language = this.guestService.getLanguage()
   }
 
   ngOnInit() {
-    this.language=this.guestService.getLanguage();
+    this.language = this.guestService.getLanguage();
     // this.guestService.setCurrentGuest(this.guestService.getGuestByToken('DAON1001'));
-    this.guest = this.guestService.getCurrentUser();
     this.dateComparator();
     this.key = this.generateKet();
     let array = this.guest.date_in.split('-');
     let aux = array[2];
     array[2] = array[0];
     array[0] = aux
-    let str = array[0]+"-"+array[1]+"-"+array[2] 
+    let str = array[0] + "-" + array[1] + "-" + array[2]
     this.dateIn = new Date(str);
     array = this.guest.date_out.split('-');
     aux = array[2];
     array[2] = array[0];
     array[0] = aux
-    str = array[0]+"-"+array[1]+"-"+array[2] 
+    str = array[0] + "-" + array[1] + "-" + array[2]
     this.dateOut = new Date(str);
   }
 
-  private dateComparator():void{
+  private dateComparator(): void {
     let str = this.todaysDate.toLocaleDateString();
-    str = str.replace('/','-');
-    str = str.replace('/','-');
-    this.show = (str >= this.guest.date_in) && (str<=this.guest.date_out);    
+    str = str.replace('/', '-');
+    str = str.replace('/', '-');
+    this.show = (str >= this.guest.date_in) && (str <= this.guest.date_out);
   }
 
-  private generateKet():string{
+  private generateKet(): string {
     let key = '';
     for (let i = 0; i < 8; i++) {
-      key +=String.fromCharCode(Math.floor(Math.random() * 25)+65)
+      key += String.fromCharCode(Math.floor(Math.random() * 25) + 65)
     }
     return key;
   }
-  logOut(){
+  logOut() {
     this.router.navigate(['home']);
   }
 }

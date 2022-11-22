@@ -15,37 +15,37 @@ export class Tab1Page implements OnInit {
   private guest: Guest;
   private todaysDate = new Date()
 
-  public show:boolean;
+  public show: boolean;
 
-  langs: string[]=[];
-  public language:string;
+  langs: string[] = [];
+  public language: string;
 
-  constructor(private guestService: GuestService,private router:Router,
-     private translateService: TranslateService) { 
-    this.langs= this.translateService.getLangs();
+  constructor(private guestService: GuestService, private router: Router,
+    private translateService: TranslateService) {
+    this.guest = this.guestService.getCurrentUser();
+    this.langs = this.translateService.getLangs();
+    guestService.setLanguage(this.guest.language);
+    this.language = guestService.getLanguage();
     translateService.use(guestService.getLanguage());
-    this.language=guestService.getLanguage();
   }
 
-  changeLang(event){
+  changeLang(event) {
     this.guestService.setLanguage(event.detail.value);
-    this.translateService.use(event.detail.value);   
+    this.translateService.use(event.detail.value);
     this.language = this.guestService.getLanguage()
   }
 
   ngOnInit() {
-    this.language=this.guestService.getLanguage();
-    this.guest = this.guestService.getCurrentUser();
     this.dateComparator()
   }
 
-  private dateComparator():void{
+  private dateComparator(): void {
     let str = this.todaysDate.toLocaleDateString();
-    str = str.replace('/','-');
-    str = str.replace('/','-');
-    this.show = (str >= this.guest.date_in) && (str<=this.guest.date_out);    
+    str = str.replace('/', '-');
+    str = str.replace('/', '-');
+    this.show = (str >= this.guest.date_in) && (str <= this.guest.date_out);
   }
-  logOut(){
+  logOut() {
     this.router.navigate(['home']);
   }
 }

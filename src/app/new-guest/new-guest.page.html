@@ -139,6 +139,24 @@
           </div>
         </ion-col>
       </ion-row>
+      <ion-row>
+        <ion-col>
+          <!-- <ion-label>{{"IDIOMA"| translate}}</ion-label> -->
+          <ion-select cancelText='{{"CANCELAR"| translate}}'
+             placeholder='{{"IDIOMA"| translate}}' (ionChange)="changeLang($event)"
+             formControlName="language">
+            <ion-select-option *ngFor="let lang of langs" >{{lang}}</ion-select-option>
+          </ion-select>
+          <div>
+            <ng-container *ngFor="let item of validationMessages['advanced_payment']">
+              <div class="errormessage" *ngIf="(myForm.get('advanced_payment').dirty || 
+              myForm.get('advanced_payment').touched) && myForm.get('advanced_payment').hasError(item.type) ">
+              {{item.message}}
+              </div>
+            </ng-container>
+          </div>
+        </ion-col>
+      </ion-row>
       <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="myForm.valid">
         <ion-fab-button  (click)="newGuest(myForm.value)">
           <ion-icon name="add"></ion-icon>
