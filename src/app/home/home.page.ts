@@ -16,7 +16,7 @@ export class HomePage {
 
   public myForm: FormGroup;
   public validationMessages: Object;
-
+  private guests:Guest[]=[];
   private ADMIN = 'ADMI0000'
 
   constructor(
@@ -24,7 +24,11 @@ export class HomePage {
     private fb: FormBuilder,
     private toast: ToastController,
     private route: Router,
-    private translateService:TranslateService) { }
+    private translateService:TranslateService) { 
+      // this.guestService.getGuestsFB().subscribe(res=>{
+      //   this.guests=res;
+      // })
+    }
 
   ngOnInit() {
     this.myForm = this.fb.group(
@@ -61,7 +65,11 @@ export class HomePage {
     this.guestService.setCurrentGuest(guest);
     this.route.navigate(['tabs']);
   }
-
+  public getGuestByToken(token:string):Guest{
+    return this.guests.find(guest=>{
+      return guest.token === token;
+    });
+  }
   clic() {
     if (this.myForm.valid)
     this.login(this.myForm.value)
