@@ -25,15 +25,13 @@ export class HomePage {
     private toast: ToastController,
     private route: Router,
     private translateService:TranslateService) { 
-      // this.guestService.getGuestsFB().subscribe(res=>{
-      //   this.guests=res;
-      // })
+    
     }
 
   ngOnInit() {
     this.myForm = this.fb.group(
       {
-        token: ["", Validators.compose([Validators.required,
+        token: ["ADMI0000", Validators.compose([Validators.required,
         Validators.minLength(8),
         Validators.maxLength(8)])]
       }

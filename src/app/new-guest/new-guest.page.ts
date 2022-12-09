@@ -118,7 +118,7 @@ export class NewGuestPage implements OnInit {
       this.guest.date_out = formattedString;
       this.guest.token = this.createToken(data);
       console.log(this.guest);      
-      this.guestService.newGuest(this.guest)
+      this.guestService.newGuestFB(this.guest)
       this.goAdminPage();
       this.presentToast('bottom','Se agregó el huesped correctamente');
     }

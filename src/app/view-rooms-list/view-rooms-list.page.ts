@@ -14,17 +14,16 @@ export class ViewRoomsListPage implements OnInit {
 
   public guests: Guest[];
   public url: string;
-  // public g2:Guest[];
-
   constructor(
     private guestService: GuestService,
     private alertController: AlertController,
     private toast: ToastController,
     private router: Router
   ) {
-    this.guests = guestService.getGuests();
-    //  this.g2=guestService.getGuests().splice(2);
-    //  console.log(this.g2);
+    this.guestService.getGuestsFB().subscribe(res=>{
+      console.log(res);        
+      this.guests=res
+    })
   }
 
   ngOnInit() {
