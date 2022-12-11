@@ -58,6 +58,8 @@
     "IDIOMA":"Language",
     "CANCELAR":"Cancelar",
     "PERIODO": "It is not in the reserved period",
-    "BIENVENIDO":"Welcome"
+    "BIENVENIDO":"Welcome" ,
+    "CAMARA":"Camera",
+    "TOMAR":"Take a picture"
     
 }

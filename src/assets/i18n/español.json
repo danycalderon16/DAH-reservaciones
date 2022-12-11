@@ -59,5 +59,7 @@
     "IDIOMA":"Idioma",
     "CANCELAR":"Cancelar",
     "PERIODO": "No está en el periodo reservado",
-    "BIENVENIDO":"Bienvenido"
+    "BIENVENIDO":"Bienvenido",
+    "CAMARA":"Camara" ,
+    "TOMAR":"Tomar una foto"
 }

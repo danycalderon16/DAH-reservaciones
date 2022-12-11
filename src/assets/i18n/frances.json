@@ -59,6 +59,7 @@
     "IDIOMA":"Langage",
     "CANCELAR":"Annuler",
     "PERIODO":"Ce n'est pas dans la période réservée",
-    "BIENVENIDO":"Accueillir"
-    
+    "BIENVENIDO":"Accueillir" ,
+    "CAMARA":"Caméra" ,
+    "TOMAR":"Prendre une photo"
 }

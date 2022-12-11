@@ -1,9 +1,15 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>tab4</ion-title>
+    <ion-title>{{"CAMARA"| translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  
+  <ion-button expand="block" class="ion-margin" (click)="getPicture()">
+    {{"TOMAR"| translate}}
+  </ion-button>
+  <div>
+    <img [src]="selectedImage?.webPath"/>
+  </div>
 </ion-content>
