@@ -23,6 +23,10 @@ const routes: Routes = [
     path: 'new-guest',
     loadChildren: () => import('./new-guest/new-guest.module').then( m => m.NewGuestPageModule)
   },
+  {
+    path: 'tab4',
+    loadChildren: () => import('./tab4/tab4.module').then( m => m.Tab4PageModule)
+  },
 ];
 
 @NgModule({
