@@ -145,7 +145,7 @@
           <ion-select cancelText='{{"CANCELAR"| translate}}'
              placeholder='{{"IDIOMA"| translate}}' (ionChange)="changeLang($event)"
              formControlName="language">
-            <ion-select-option *ngFor="let lang of langs" >{{lang}}</ion-select-option>
+            <ion-select-option *ngFor="let lang of langs" >{{lang | titlecase}}</ion-select-option>
           </ion-select>
           <div>
             <ng-container *ngFor="let item of validationMessages['advanced_payment']">
