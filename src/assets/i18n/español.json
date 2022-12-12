@@ -61,5 +61,6 @@
     "PERIODO": "No está en el periodo reservado",
     "BIENVENIDO":"Bienvenido",
     "CAMARA":"Camara" ,
-    "TOMAR":"Tomar una foto"
+    "TOMAR":"Tomar una foto",
+    "SAVE":"Guardar foto"
 }

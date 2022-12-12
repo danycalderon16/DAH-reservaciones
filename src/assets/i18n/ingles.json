@@ -60,6 +60,7 @@
     "PERIODO": "It is not in the reserved period",
     "BIENVENIDO":"Welcome" ,
     "CAMARA":"Camera",
-    "TOMAR":"Take a picture"
+    "TOMAR":"Take a picture",
+    "SAVE":"Save picture"
     
 }

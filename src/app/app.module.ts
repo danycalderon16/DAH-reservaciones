@@ -14,6 +14,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from 'src/environments/environment';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 
 export function HttpLoaderFactory(httpClient: HttpClient){
   return new TranslateHttpLoader(httpClient, "../assets/i18n/",".json"); 
@@ -28,7 +29,8 @@ export function HttpLoaderFactory(httpClient: HttpClient){
       useFactory: HttpLoaderFactory,
       deps: [HttpClient]
     }
-  }),AngularFireModule.initializeApp(environment.firebaseConfig),AngularFireDatabaseModule],
+  }),AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireDatabaseModule,AngularFireStorageModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },AngularFirestore],
   bootstrap: [AppComponent],
 })
