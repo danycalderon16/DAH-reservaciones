@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { Capacitor } from '@capacitor/core';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { PhotoService } from '../services/photo.service';
-import { LoadingController, ToastController } from '@ionic/angular';
+import { IonSlides, LoadingController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab4',
@@ -11,14 +11,22 @@ import { LoadingController, ToastController } from '@ionic/angular';
   styleUrls: ['./tab4.page.scss'],
 })
 export class Tab4Page implements OnInit {
+  @ViewChild('mySlider')  slides: IonSlides;
 
   selectedImage: any;
+  public photos:string[] = []
 
   constructor(private photoService:PhotoService,
     private loadingController:LoadingController,
-    private toastController:ToastController) { }
+    private toastController:ToastController) {
+      this.photos = photoService.getFileList();      
+     }
 
   ngOnInit() {
+  }
+
+  swipeNext(){
+    this.slides.slideNext();
   }
 
   checkPlatformForWeb() {
@@ -54,6 +62,7 @@ export class Tab4Page implements OnInit {
         .then((results) => {
           console.log(results);          
           loading.dismiss();
+          this.photos = this.photoService.getFileList();     
           this.presentToast('bottom','La foto se ha subido correctamente');
         });
 

@@ -5,14 +5,19 @@
 </ion-header>
 
 <ion-content>
-  
+
   <ion-button expand="block" class="ion-margin" (click)="getPicture()">
     {{"TOMAR"| translate}}
   </ion-button>
   <div>
-    <img [src]="selectedImage?.webPath"/>
+    <img [src]="selectedImage?.webPath" />
   </div>
   <ion-button expand="block" class="ion-margin" (click)="savePicture()">
-    {{"GUARDAR"| translate}}
+    {{"SAVE"| translate}}
   </ion-button>
+  <ion-slides pager="true" #mySlider class="slides">
+    <ion-slide *ngFor="let photo of photos" >
+      <img class="img-slide" src={{photo}} />
+    </ion-slide>
+  </ion-slides>
 </ion-content>

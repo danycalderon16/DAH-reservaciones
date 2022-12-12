@@ -9,14 +9,14 @@ import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 export class PhotoService {
 
 
-  public filelist = [];
+  private filelist:string[] = [];
   public src = '';
   public putblob: any;
 
   constructor(private storage: AngularFireStorage) { }
 
 
-  private getFileList() {
+  public getFileList() {
     this.filelist = []
     const pre = 'images/guests/0fLpXd4IdCIXAyPS0hO4/photos/'
     const ref = this.storage.ref(pre);
@@ -28,8 +28,8 @@ export class PhotoService {
           this.filelist.push(data)
         });
       }
-      console.log(this.filelist)
     });
+    return this.filelist;
   }
 
 
@@ -44,16 +44,12 @@ export class PhotoService {
     return new Promise((resolve, reject) => {
       const ref = this.storage.ref('images/guests/0fLpXd4IdCIXAyPS0hO4/photos/' + fileName)
       ref.put(this.putblob).then((res) => {
+        // this.setFileList();
         resolve(res);
       }).catch(err => {
         reject(err);
       });
     });
-
-    // return {
-    //   filepath: fileName,
-    //   webviewPath: photo.webPath
-    // };
   }
 
   private async readAsBase64(photo: Photo) {
