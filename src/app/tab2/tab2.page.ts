@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Guest } from '../models/guest';
 import { GuestService } from '../services/guest.service';
 import { TranslateService } from '@ngx-translate/core';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab2',
@@ -22,7 +23,8 @@ export class Tab2Page implements OnInit {
   public language: string;
 
   constructor(private guestService: GuestService, private router: Router,
-    private translateService: TranslateService) {
+    private translateService: TranslateService,
+    private alert:AlertController) {
     this.guest = this.guestService.getCurrentUser();
     this.langs = this.translateService.getLangs();
     guestService.setLanguage(this.guest.language);
@@ -69,7 +71,27 @@ export class Tab2Page implements OnInit {
     }
     return key;
   }
-  logOut() {
-    this.router.navigate(['home']);
+  public async logOut() {
+    const alert = await this.alert.create({
+      header: 'Atención',
+      message: '¿Está seguro de salir de la sesión?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+
+          },
+        },
+        {
+          text: 'Sí',
+          role: 'confirm',
+          handler: () => {          
+              this.router.navigate(['home']);
+          },
+        },
+      ],
+    });
+    await alert.present();
   }
 }

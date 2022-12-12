@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Guest } from '../models/guest';
 import { GuestService } from '../services/guest.service';
@@ -16,7 +17,8 @@ export class Tab3Page implements OnInit {
   public language:string;
 
   constructor(private guestService: GuestService,private router:Router,
-     private translateService: TranslateService) { 
+     private translateService: TranslateService,
+     private alert:AlertController) { 
     this.guest = this.guestService.getCurrentUser();
     this.langs = this.translateService.getLangs();
     guestService.setLanguage(this.guest.language);
@@ -31,7 +33,29 @@ export class Tab3Page implements OnInit {
 
   ngOnInit() {
   }
-  logOut(){
-    this.router.navigate(['home']);
+
+  public async logOut() {
+    const alert = await this.alert.create({
+      header: 'Atención',
+      message: '¿Está seguro de salir de la sesión?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+
+          },
+        },
+        {
+          text: 'Sí',
+          role: 'confirm',
+          handler: () => {          
+              this.router.navigate(['home']);
+          },
+        },
+      ],
+    });
+    await alert.present();
   }
+
 }

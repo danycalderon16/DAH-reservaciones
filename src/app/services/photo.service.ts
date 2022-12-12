@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Photo } from '@capacitor/camera';
 import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
+import { GuestService } from './guest.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,12 +14,13 @@ export class PhotoService {
   public src = '';
   public putblob: any;
 
-  constructor(private storage: AngularFireStorage) { }
+  constructor(private storage: AngularFireStorage,
+    private guest:GuestService) { }
 
 
   public getFileList() {
     this.filelist = []
-    const pre = 'images/guests/0fLpXd4IdCIXAyPS0hO4/photos/'
+    const pre = `images/guests/${this.guest.getCurrentUser().token}/photos/`
     const ref = this.storage.ref(pre);
     let myurlsubscription = ref.listAll().subscribe((data) => {
       for (let i = 0; i < data.items.length; i++) {
@@ -42,7 +44,7 @@ export class PhotoService {
       directory: Directory.Data
     });
     return new Promise((resolve, reject) => {
-      const ref = this.storage.ref('images/guests/0fLpXd4IdCIXAyPS0hO4/photos/' + fileName)
+      const ref = this.storage.ref(`images/guests/${this.guest.getCurrentUser().token}/photos/` + fileName)
       ref.put(this.putblob).then((res) => {
         // this.setFileList();
         resolve(res);
